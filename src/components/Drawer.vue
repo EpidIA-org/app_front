@@ -1,7 +1,7 @@
 <template>
   <v-navigation-drawer v-model="isOpen" absolute right temporary>
     <v-list nav dense>
-      <h3>CovidIA Initiative</h3>
+      <h3>EpidIA Initiative</h3>
       <v-list-item-group active-class="deep-purple--text text--accent-4">
         <v-list-item v-for="section in sections" :key="section.text">
           <v-list-item-title :onclick="`window.location.href = '${section.link}';`">{{section.text}}</v-list-item-title>

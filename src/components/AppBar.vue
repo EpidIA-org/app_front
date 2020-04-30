@@ -1,7 +1,7 @@
 <template>
   <v-app-bar>
     <v-toolbar-title>
-      <img class="mr-3" :src="require('../assets/covidia.jpg')" height="50" />
+      <img class="mr-3" :src="require('../assets/epidia.jpg')" height="50" />
     </v-toolbar-title>
     <v-spacer></v-spacer>
     <!-- On click emit a toggleDrawer event to open the Right panel -->
