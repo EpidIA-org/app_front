@@ -39,6 +39,7 @@ const store = new Vuex.Store({
         records: [], // Data feeded from action getMainData
         bedRecords: [], // Data feeded from action getBedData
         inseeRecords: [], // Data from INSEE
+        predictionRecords: [] // Data from model Predictions
     },
     getters: {
         APP_URL: state => (state.isLocal) ? state.APP_URL_LOCAL : state.APP_URL_PROD, // Single getter for API URL to use
@@ -51,6 +52,9 @@ const store = new Vuex.Store({
         selectedDay: state => state.selectedDate.split("-")[2], // Selected Day
         selectedMonth: state => state.selectedDate.split("-")[1], // Selected Month
         selectedYear: state => state.selectedDate.split("-")[0], // Selected Year
+        lastDateDay: state => state.lastDataUpdateDate.split("-")[2], // Last Day
+        lastDateMonth: state => state.lastDataUpdateDate.split("-")[1], // Last Month
+        lastDateYear: state => state.lastDataUpdateDate.split("-")[0], // Last Year
         fullNameAreas: state => Object.entries(state.availableAreas).map(area => `${area[0]} - ${area[1]}`), // Array of available areas with format `<CODE> - <NAME>`
         dateRecords: (state, getters) => { // List of all area records for the selected date
             if (state.selectedAreaCode == "00") {
@@ -102,7 +106,8 @@ const store = new Vuex.Store({
         indexINSEERecords: state => state.inseeRecords.map(r => r.area), // INSEE Index object as `<areacode>`
         maxDateAvailable: (state, getters) => getters.hasData ? getters.areaRecords.map(x => x.date).reduce((a, b) => (a > b) ? a : b) : null, // Get the most recent date available for the selected area
         areaBeds: state => state.bedRecords.find(x => x.code === state.selectedAreaCode), // Single Object with the bed capacities for the selected Area
-        inseeAreaRecord: state => (state.inseeRecords.length > 0)?state.inseeRecords.find(x => x.area === state.selectedAreaCode): null,
+        inseeAreaRecord: state => (state.inseeRecords.length > 0) ? state.inseeRecords.find(x => x.area === state.selectedAreaCode) : null,
+        areaPredictionRecords: state => (state.predictionRecords.filter(x => ((x.area === state.selectedAreaCode) && (x.jour > state.lastDataUpdateDate)) ))
     },
     mutations: {
         setLaunched: function (state) { state.launched = true }, // Modify the launched state
@@ -124,6 +129,10 @@ const store = new Vuex.Store({
         },
         setBedData: function (state, data) { // Modify the bedRecords
             state.bedRecords = data;
+        },
+        pushPredictionsRecords: function (state, payload) { // Add records to the store
+            let arrayToPush = state.predictionRecords;
+            state.predictionRecords = arrayToPush.concat(payload);
         }
     },
     actions: {
@@ -187,7 +196,7 @@ const store = new Vuex.Store({
         },
         getInseeData: async function ({ commit, state, getters }) {// Axios GET Call to obtain bed capacities
             commit('setLoadingInsee', true);
-            if (getters.indexINSEERecords.indexOf(state.selectedAreaCode) === -1){
+            if (getters.indexINSEERecords.indexOf(state.selectedAreaCode) === -1) {
                 try {
                     let response = await axios.get(`${getters.APP_URL}/api/v1/get/data_insee/all`, {
                         params: {
@@ -196,7 +205,7 @@ const store = new Vuex.Store({
                         }
                     });
                     let payload = {
-                        area: state.selectedAreaCode, 
+                        area: state.selectedAreaCode,
                         data: response.data
                     }
                     commit('pushInseeRecords', payload)
@@ -207,7 +216,18 @@ const store = new Vuex.Store({
                     }
                     commit('setLoadingInsee', false);
                 }
-            } 
+            }
+        },
+        getPredictions: async function ({ commit, state, getters }) {
+            try {
+                let response = await axios.get(`${getters.APP_URL}/api/get/from/predictor/${getters.lastDateYear}/${getters.lastDateMonth}/${getters.lastDateDay}/00`)
+                let payload = response.data
+                commit('pushPredictionsRecords', payload)
+            } catch (error) {
+                if (state.isDebug) {
+                    console.log(error);
+                }
+            }
         }
     }
 })

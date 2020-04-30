@@ -54,6 +54,19 @@ export default {
         return 0;
       });
     },
+    hotfixHasPredictions: function(){
+        if (this.$store.state.selectedAreaCode !== "00"){
+            if (this.$store.state.selectedKPI === 'Personnes hospitalisées (nouveaux)'){
+                return 'new_hosp'
+            } else if (this.$store.state.selectedKPI === 'Personnes décédées (nouveaux)') {
+                return 'new_death'
+            } else {
+                return false
+            }
+        } else {
+            return false
+        }
+    },
     labels: function() {
       return this.sortedArray.map(x => x.date);
     },
@@ -62,8 +75,16 @@ export default {
     },
     chartData: function(){
         let chartArray = []
-        chartArray.push(['Date', ''])
-        let dataArray  = this.sortedArray.map(x => [x.date, x.data])
+        let dataArray = []
+        if (this.hotfixHasPredictions){
+            chartArray.push(['Date', '', 'Pred'])
+            dataArray  = this.sortedArray.map(x => [x.date, x.data, 0])
+            console.log(this.$store.getters.areaPredictionRecords)
+            dataArray = dataArray.concat(this.$store.getters.areaPredictionRecords.map(x => [x.jour, 0, x[this.hotfixHasPredictions]]))
+        } else {
+            chartArray.push(['Date', ''])
+            dataArray  = this.sortedArray.map(x => [x.date, x.data])
+        }
         return chartArray.concat(dataArray)
     },
     chartOptions: function() {
@@ -77,7 +98,7 @@ export default {
         hAxis: { format: 'decimal' },
         height: 230,
         wAxis: { format: 'decimal' },
-        colors: [this.color],
+        colors: (this.hotfixHasPredictions)?[this.color, "black"]:[this.color],
         legend: { position: 'bottom' }
       })
     }

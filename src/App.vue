@@ -241,6 +241,7 @@ export default {
     } else {
       this.getLastDate(); // Get Last available date
       this.$store.commit("setDate", this.lastUpdated)
+      this.getPredictions(); // Get Predictions
       this.getBedData(); // Get bed capacities
       this.getInseeData(); // Get Insee Data
       this.getMainData(); // Get records
@@ -420,7 +421,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(["getMainData", "getLastDate", "getBedData", "getInseeData"]),
+    ...mapActions(["getMainData", "getLastDate", "getBedData", "getInseeData", "getPredictions"]),
     validateCall: function() {
       // Cache Function
       // CACHE NOT IMPLEMENTED IN FRONT
