@@ -94,3 +94,17 @@ export const getQuantileFromArray = function (values) {
         { min: q90, max: 1000000 }
       ].slice(2, 9);
 }
+
+export const aggregate = function (data, keyFields, accumulator) {
+    var createNewObj = (ref, fields) => {
+      return fields.reduce((result, key) => {
+        return Object.assign(result, { [key] : ref[key] });
+      }, {});
+    }
+    return Object.values(data.reduce((result, object) => {
+      let key = keyFields.map(key => object[key]).join('');
+      let val = result[key] || createNewObj(object, keyFields);
+      val[accumulator.key] = accumulator.fn(val[accumulator.key] || 0, object[accumulator.key]);
+      return Object.assign(result, { [key] : val });
+    }, {}));
+  }
