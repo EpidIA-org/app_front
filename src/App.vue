@@ -242,8 +242,8 @@ export default {
       this.getLastDate(); // Get Last available date
       this.$store.commit("setDate", this.lastUpdated)
       this.getPredictions(); // Get Predictions
-      this.getBedData(); // Get bed capacities
-      this.getInseeData(); // Get Insee Data
+      // this.getBedData(); // Get bed capacities
+      // this.getInseeData(); // Get Insee Data
       this.getMainData(); // Get records
       
     }
