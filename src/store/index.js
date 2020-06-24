@@ -19,7 +19,7 @@ const store = new Vuex.Store({
         launched: false,
         isDebug: false, // Encapsulate console.log with this state
         isMockup: false, // To load data from local JSON
-        isLocal: false, // To load data from local endpoint
+        isLocal: true, // To load data from local endpoint
         // Main App States
         isLoading: false, // Check if data download is ongoing
         isLoadingInsee: false, // Check if data download is ongoing
@@ -34,7 +34,7 @@ const store = new Vuex.Store({
         selectedKPI: "Personnes hospitalisées", // KPI Identifier
         selectedDate: new Date(new Date().setDate(new Date().getDate() - 2)).toISOString().substr(0, 10), // Date Identifier
         //Contributors
-        contributors: CONTRIBUTORS_JSON, //JSON of all COVIDIA contributors
+        contributors: CONTRIBUTORS_JSON, //JSON of all EPIDIA contributors
         // Data Records
         records: [], // Data feeded from action getMainData
         bedRecords: [], // Data feeded from action getBedData

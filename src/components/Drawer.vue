@@ -37,14 +37,7 @@ export default {
 
   data: () => ({
     sections: [
-      { text: "Accueil", link: "https://covid-ia.org/" },
-      { text: "Blog", link: "https://covid-ia.org/blog/" },
-      { text: "A propos", link: "https://covid-ia.org/about-us/" },
-      {
-        text: "Contact",
-        link:
-          "https://26fec6c8.sibforms.com/serve/MUIEAATIvALvkE7eBH0-TYp9kgf7PT-frNdC0GT2cg7Fl--wkU9KiV7GeIfEGEBt2_Rh1hTlge1RiiYkJT4BkyQUX2UUaaoeb4IXd6gw5rB9Pqb53sV7Z70Tv5d2OAgUkclFJBfw8S7oWMrMpFJ7fyjfk_Ym-SiNd4gd0nLLg2AKBj27N4G5UW7o3QTFyLgs_RO1XXaPQYgMUKJ3"
-      }
+      { text: "Accueil", link: "https://epidia.org/" },
     ],
     isOpen: false
   }),

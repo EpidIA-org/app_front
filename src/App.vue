@@ -1,6 +1,6 @@
 <template>
   <!-- START VUETIFY APP -->
-  <v-app id="covidiapp">
+  <v-app id="epidiapp">
     <!-- RIGHT PANEL -->
     <Drawer v-model="drawer" />
     <header>
@@ -433,7 +433,7 @@ export default {
 
 
 <style>
-#covidiapp {
+#epidiapp {
   background: #f4f4f8;
 }
 .content {
