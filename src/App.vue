@@ -158,7 +158,7 @@
             />
           </v-col>
           <!-- BED SATURATION CARD -->
-          <v-col cols="12" md="6" v-if="hasData">
+          <v-col cols="12" md="6" v-if="false && hasData">
             <SaturationCard
               :status="objectForSaturationCard"
               :maximum="areaBeds"
@@ -166,7 +166,7 @@
             />
           </v-col>
           <!-- INSEE DEATH CARD -->
-          <v-col cols="12" md="6" v-if="hasData && deathRelated">
+          <v-col cols="12" md="6" v-if="false && hasData && deathRelated">
             <InseeCard
               v-if="!isLoadingInsee"
               :selectedArea="selectedAreaName"
