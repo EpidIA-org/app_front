@@ -1,7 +1,7 @@
 <template>
   <v-app-bar class="toolbar" v-show="showNavbar" bottom fixed :collapse="showNavbar">
     <v-toolbar-title>
-      <img class="mr-3" :src="require('../assets/covidia.jpg')" height="50" />
+      <img class="mr-3" :src="require('../assets/epidia.jpg')" height="50" />
     </v-toolbar-title>
     <v-spacer></v-spacer>
     <!-- <v-app-bar-nav-icon></v-app-bar-nav-icon> -->

@@ -1,8 +1,8 @@
-# CovidIA Vue App
+# EpidIA Vue App
 
-This folder is the Vue CLI application for the CovidIA front end team. Further details on mockups and project are available [here](https://docs.google.com/presentation/d/1TY9TrlR02dQ2ocEVyIc62T4F1SxLZowzdtkMpkcMcw0/edit#slide=id.g73216de455_4_490).
+This folder is the Vue CLI application for the EpidIA front end team. Further details on mockups and project are available [here](https://docs.google.com/presentation/d/1TY9TrlR02dQ2ocEVyIc62T4F1SxLZowzdtkMpkcMcw0/edit#slide=id.g73216de455_4_490).
 
-CovidIA is an open source project under MIT Licence for epidemic measurements and analysis. This repository provides a Vue CLI Dashboard for France Covid-19 Epidemic.
+EpidIA is an open source project under MIT Licence for epidemic measurements and analysis. This repository provides a Vue CLI Dashboard for France Covid-19 Epidemic.
 
 ## Project setup
 To setup the project use the following command line

@@ -1,6 +1,6 @@
 <template>
   <!-- START VUETIFY APP -->
-  <v-app id="covidiapp">
+  <v-app id="epidiapp">
     <!-- RIGHT PANEL -->
     <Drawer v-model="drawer" />
     <header>
@@ -158,7 +158,7 @@
             />
           </v-col>
           <!-- BED SATURATION CARD -->
-          <v-col cols="12" md="6" v-if="hasData">
+          <v-col cols="12" md="6" v-if="false && hasData">
             <SaturationCard
               :status="objectForSaturationCard"
               :maximum="areaBeds"
@@ -166,7 +166,7 @@
             />
           </v-col>
           <!-- INSEE DEATH CARD -->
-          <v-col cols="12" md="6" v-if="hasData && deathRelated">
+          <v-col cols="12" md="6" v-if="false && hasData && deathRelated">
             <InseeCard
               v-if="!isLoadingInsee"
               :selectedArea="selectedAreaName"
@@ -242,8 +242,8 @@ export default {
       this.getLastDate(); // Get Last available date
       this.$store.commit("setDate", this.lastUpdated)
       this.getPredictions(); // Get Predictions
-      this.getBedData(); // Get bed capacities
-      this.getInseeData(); // Get Insee Data
+      // this.getBedData(); // Get bed capacities
+      // this.getInseeData(); // Get Insee Data
       this.getMainData(); // Get records
       
     }
@@ -433,7 +433,7 @@ export default {
 
 
 <style>
-#covidiapp {
+#epidiapp {
   background: #f4f4f8;
 }
 .content {
